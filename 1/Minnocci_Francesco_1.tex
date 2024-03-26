@@ -1,0 +1,361 @@
+\documentclass[a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[italian]{babel}
+\usepackage{hyperref}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathtools}
+% for \lightning
+\usepackage{stmaryrd}
+\usepackage{geometry}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+
+% Remove indentation globally
+\setlength{\parindent}{0pt}
+% Have blank lines between paragraphs
+\usepackage[parfill]{parskip}
+
+\hypersetup{
+	colorlinks = true, % links instead of boxes
+	urlcolor   = blue, % external hyperlinks
+	linkcolor  = blue, % internal links
+	citecolor  = red   % citations
+}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\Z}{\mathbb{Z}}
+\renewcommand{\P}{\mathbb{P}}
+
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\Hom}{\operatorname{Hom}}
+
+\newcommand{\ssfrac}[2]{
+    \raisebox{+0.3ex}{$#1$}
+    /
+    \raisebox{-0.3ex}{$#2$}
+}
+
+\newcommand{\sfrac}[2]{
+    \raisebox{+0.3ex}{\scalebox{0.9}{$#1$}}
+    /
+    \raisebox{-0.3ex}{\scalebox{0.9}{$#2$}}
+}
+
+\newcommand\restr[2]{{% we make the whole thing an ordinary symbol
+  \left.\kern-\nulldelimiterspace % automatically resize the bar with \right
+  #1 % the function
+  \vphantom{\big|} % pretend it's a little taller at normal size
+  \right|_{#2} % this is the delimiter
+  }}
+
+\renewcommand{\labelitemii}{$\circ$}
+\renewcommand{\Im}{\operatorname{Im}}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}[section]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Osservazione}
+
+\theoremstyle{definition}
+\newtheorem*{exercise}{Esercizio}
+
+\title{Istituzioni di Geometria 2023/2024}
+\author{Francesco Minnocci}
+\begin{document}
+\maketitle
+\section*{29 Febbraio}
+\textbf{Esercizio 1.1}
+Costruisci due atlanti lisci non compatibili su $\R$. Mostra che le due varietá lisce che ne risultano sono però diffeomorfe.
+\begin{proof}
+    Consideriamo due atlanti su $\R$ formati da una sola carta: quello standard dato dall'identità ed $\mathcal{A} = \{ f:\: \R\to\R \}$, con
+    \[
+        f(x) = \begin{cases}
+            x   & \text{se } x \leq 0, \\
+            x^2 & \text{se } x > 0.
+        \end{cases}
+    \]
+    Quest'ultimo è un'atlante liscio in quanto l'unica mappa di transizione $f \circ f ^{-1} =  \id_{\R}$ è liscia, tuttavia non è compatibile con l'atlante standard: se
+    lo fosse, allora la mappa di transizione
+    \[
+        f \circ \id_{\R}^{-1} = f
+    \]
+    dovrebbe essere liscia, ma non lo è in $x = 0$.
+
+    Mostriamo infine che $f$ è un diffeomorfismo tra $(\R, \mathcal{A})$ ed $\R$ con l'atlante standard: $f$ è una funzione liscia tra varietà perché in carte diventa
+    \[
+        \id_{\R} \circ f \circ f^{-1} = \id_{\R}
+        .\]
+    Analogamente, la sua inversa
+    \[
+        f^{-1}(x) = \begin{cases}
+            x        & \text{se } x \leq 0, \\
+            \sqrt{x} & \text{se } x > 0
+        \end{cases}
+    \]
+    è liscia visto che \[
+        f \circ f^{-1} \circ \id_{\R}^{-1} = \id_{\R}.
+    \]
+    \begin{remark}
+        La costruzione funziona anche sostituendo $f$ con un qualsiasi omeomorfismo di $\R$ in sè che non sia $C^\infty$.
+    \end{remark}
+\end{proof}
+\textbf{Esercizio 1.2} (svolto in collaborazione con Eva Silvestri)
+Mostra che la mappa
+\[
+    f:\:S^n \to \R\P^n, \quad (x_0, \ldots, x_n) \mapsto [x_0 : \ldots : x_n]
+\]
+è liscia.
+
+\begin{proof}
+    Sia $(x_0, \ldots, x_n) \in S^n$, e fissiamo un indice $i$ tale che $x_i \neq 0$. Senza perdità di generalità, supponiamo $x_i>0$ (le coordinate non cambiano nel caso $x_i < 0$). Allora, $x_i$ è contenuto nell'aperto
+    \[
+        U_i^+ := \{ (x_0 , \ldots , x_n) \in S^n \mid x_i > 0 \},
+    \]
+    che identifichiamo con la palla aperta unitaria $B^n\subset\R^n$ tramite la carta
+    \begin{align*}
+        \varphi_i^+ : U_i^+        & \to B^n                                    \\
+        \quad (x_0 , \ldots , x_n) & \mapsto (x_0,\ldots,\hat{x}_i,\ldots,x_n).
+    \end{align*}
+    Inoltre, notiamo che $f$ manda $U_i^+$ nella carta affine
+    \[
+        V_i := \{ [x_0 : \ldots : x_n] \in \R\P^n \mid x_i \neq 0 \}
+        ,\]
+    che è omeomorfa ad $\R^n$ attraverso la mappa
+    \begin{align*}
+        \psi_i : V_i               & \longrightarrow \R^n                                                                                                   \\
+        \quad [x_0 : \ldots : x_n] & \longmapsto \left( \frac{x_0}{x_i}, \ldots, \frac{x_{i-1}}{x_i}, \frac{x_{i+1}}{x_i}, \ldots, \frac{x_n}{x_i} \right).
+    \end{align*}
+    Mostriamo ora che
+    \[
+        F \coloneqq  \psi_i \circ f \circ (\varphi_i^+)^{-1} : B^n \to \R^n
+    \]
+    è ben definita e liscia: l'inversa di $\varphi_i^+$ è data da
+    \begin{align*}
+        (\varphi_i^+)^{-1} : B^n & \to U_i^+                                                                                           \\
+        y                        & \mapsto \left( y_1, \ldots, y_{i-1}, \sqrt{1 - {\lVert y \rVert}^2 }, y_{i+1}, \ldots, y_n \right).
+    \end{align*}
+    Inoltre, dato che $\lVert y \rVert < 1$ si ha che
+    \[
+        F(y) = \left( \frac{y_1}{\sqrt{1 - {\lVert y \rVert}^2 }}, \ldots, \frac{y_n}{\sqrt{1 - {\lVert y \rVert}^2 }} \right)
+    \]
+    è un'onesta composizione di mappe lisce, ed è quindi liscia.
+\end{proof}
+
+\textbf{Esercizio 1.3} (svolto in collaborazione con Eva Silvestri)
+Costruisci un diffeomorfismo tra $S^1$ ed $\R\P^1$.
+
+\begin{proof}
+    Siano $N=(0,1)$ ed $S=(0,-1)$ i poli sud e nord di $S^1$, e definiamo le mappe $f_i$ per $i=1,2$ come
+    \begin{align*}
+        f_1 & =\phi_N^{-1}\circ D_1 :\: U_1\subset\R\P^1\to S^1\setminus N, \\
+        f_2 & =\phi_S^{-1}\circ D_2 :\: U_2\subset\R\P^1\to S^1\setminus S.
+    \end{align*}
+    dove $\phi_S$ e $\phi_N$ sono le proiezioni stereografiche, cioè
+    \begin{align*}
+        \phi_N (x,y) & = \frac{2x}{1-y}, \\
+        \phi_S (x,y) & = \frac{2x}{1+y},
+    \end{align*}
+    e $D_i:\:U_i\to\R$ per $i=1,2$ sono le carte di $\R\P^1$
+    \begin{align*}
+        D_1([x : y]) & = \frac{y}{x}, \\
+        D_2([x : y]) & = \frac{x}{y}.
+    \end{align*}
+    Scriviamo esplicitamente le parametrizzazioni di $S^1$:
+    \begin{align*}
+        \phi_N^{-1}(t) & = \left( \frac{t}{1+t^2}, \frac{t^2-1}{1+t^2} \right), \\
+        \phi_S^{-1}(t) & = \left( \frac{t}{1+t^2}, \frac{1-t^2}{1+t^2} \right).
+    \end{align*}
+    Visto che le $f_i$ coincidono sull'intersezione dei domini $S^1 \setminus \{ N, S \}$, abbiamo costruito per casi un diffeomorfismo $f$ tra $\R\P^1$ ed $S^1$, posto che le $f_i$ siano lisce: l' inversa
+    $g :\; S^1 \to \R\P^1$ è analogamente definita per casi come
+    \[
+        g(x,y) = \begin{cases}
+            (H_1\circ\phi_N)(x,y)=[1-y:2x] & \text{se } y \neq 1,  \\
+            (H_2\circ\phi_S)(x,y)=[2x:1+y] & \text{se } y \neq -1,
+        \end{cases}
+    \]
+    dove $H_i$ è l'inversa di $D_i$ per $i=1,2$.
+
+    Infine, usando come atlanti per $S^1$ e $\R\P^1$ quelli descritti sopra, $f$ e $g$ sono chiaramente lisce perché inducono l'identità su $\R$ in carte.
+\end{proof}
+\textbf{Esercizio 2.1}
+Sia $p(z)\in\C[z]$ polinomio di grado $d\geq1$. Considera l'insieme
+$S = \{z \mid p^{\prime} (z) = 0\}.$ Mostra che la mappa
+\begin{align*}
+    p: \C \setminus p^{-1}(p(S)) & \to \C \setminus p(S), \\
+    z                            & \mapsto p(z)
+\end{align*}
+è un rivestimento liscio di grado d.
+\begin{proof}
+    Innanzitutto, per il criterio della derivata le fibre della mappa in questione sono tutte di cardinalità $d$. Inoltre, la mappa è un diffeomorfismo locale per il teorema d'invertibilità locale, sempre per la scelta del dominio effettuata. Ora, preso $y\in p(S)$, sia $p^{-1}(x)=\{x_1, \dots , x_d\}$, e siano $V_i$ degli intorni aperti degli $x_i$ tali che $p$ è un diffeomorfismo su $V_i$. A meno di restringerli, possiamo supporre che i $V_i$ siano disgiunti, e posto $U\coloneqq \bigcap_{i=1}^d p(V_i)$, si ha che
+    \[
+        p^{-1}(U) = \bigsqcup_{i=1}^d V_i.
+    \]
+    Abbiamo quindi mostrato che $U$ è un intorno ben rivestito di $y$ tale che $p: V_i \to U$ è un diffeomorfismo per $i = 1, \ldots, d$, e quindi $p$ è un rivestimento liscio di grado $d$.
+\end{proof}
+\textbf{Esercizio 2.2} (svolto in collaborazione con Lorenzo Femia)
+
+Considera il gruppo $\Gamma < \operatorname{Isom}(\R^3)$ generato da:
+\begin{align*}
+    f(x,y,z) = ( & x+1,y,z), \qquad g(x,y,z) = (x,y+1,z), \\
+                 & h(x,y,z) = (-x,-y,z+1).
+\end{align*}
+Mostra che l'azione è libera e propriamente discontinua, e che la varietà $\R³/\Gamma$ è compatta ed orientabile ma non omeomorfa al 3-toro. Mostra che questa varietà ha un
+rivestimento doppio diffeomorfo al 3-toro.
+\begin{proof}
+    Osserviamo che valgono le seguenti relazioni:
+    \[
+        \begin{cases}
+            f \circ g = g\circ f,      \\
+            h \circ f = f^{-1}\circ h, \\
+            h \circ g = g^{-1}\circ h.
+        \end{cases}
+    \]
+    Da queste segue che ogni elemento $\gamma$ di $\Gamma$ si scrive in modo unico come
+    \[
+        \gamma = f^{k} \circ g^{l} \circ h^{m}
+    \]
+    per qualche $k,l,m\in\Z$. Vediamo che lo stabilizzatore di qualsiasi punto $(x,y,z)\in\R^3$ è banale:
+    \begin{equation}\label{eq:orbit}
+        \gamma \cdot (x,y,z) = f^{k} \circ g^{l} \circ h^{m} \cdot (x,y,z) = ((-1)^m x+k,(-1)^m y+l,z+m),
+    \end{equation}
+    e quindi $\gamma \cdot (x,y,z) = (x,y,z)$ se e solo se $k=l=m=0$.
+
+    Per vedere che l'azione è propriamente discontinua, presi due punti $x,y\in\R^3$ scegliamo come loro intorni due palle aperte di raggio $\frac{1}{4}$. Allora, la formula
+    \eqref{eq:orbit} mostra che l'orbita di $x$ è discreta, e quindi la sua intersezione con il compatto $\overline{B_{\frac{1}{4}}(y)}$ è finita, il che mostra che l'azione è propriamente discontinua.
+
+    Per quanto riguarda la compattezza, osserviamo che $D\coloneqq [-\frac{1}{2},\frac{1}{2}]\times [-\frac{1}{2},\frac{1}{2}]\times[0,1]$ è un dominio fondamentale per l'azione di $\Gamma$, e quindi
+    \[
+        \ssfrac{\R^3}{\Gamma}\simeq \ssfrac{D}{\Gamma}
+    \]
+    è immagine del compatto $D$ mediante la mappa continua di proiezione, che ne mostra la compattezza.
+
+    L'orientabilità di $\sfrac{\R^3}{\Gamma}$ segue dal fatto che $\Gamma$ preserva l'orientazione. Infatti, visto che lavoriamo su $\R^3$ possiamo calcolare i differenziali dei generatori di $\Gamma$ con lo Jacobiano, ed hanno tutti determinante 1:
+    \[
+        \begin{cases}
+            df_p = \begin{pmatrix}
+                1 & 0 & 0 \\
+                0 & 1 & 0 \\
+                0 & 0 & 1
+            \end{pmatrix}, \\
+            dg_p = \begin{pmatrix}
+                1 & 0 & 0 \\
+                0 & 1 & 0 \\
+                0 & 0 & 1
+            \end{pmatrix}, \\
+            dh_p = \begin{pmatrix}
+                -1 & 0 & 0 \\
+                0  & -1 & 0 \\
+                0  & 0  & 1
+            \end{pmatrix}.
+        \end{cases}
+    \]
+
+    Essendo il rivestimento $\R^3 \to \sfrac{\R^3}{\Gamma}$ regolare, il gruppo fondamentale di $\sfrac{\R^3}{\Gamma}$ è isomorfo a $\Gamma$, che non è abeliano per le relazioni esibite sopra. D'altra parte, $\pi_1(T^3) = \Z^3$ è abeliano, e quindi la varietà $\sfrac{\R^3}{\Gamma}$ non è omeomorfa al 3-toro.
+
+    Infine, il sottogruppo normale $N=\langle f,g,h^2 \rangle$ di $\Gamma$ ha indice 2, quindi induce un rivestimento di grado 2
+    \[
+        \ssfrac{\R^3}{N} \to \ssfrac{\R^3}{\Gamma}.
+    \]
+    L'azione di $N$ su $\R^3$ coincide con quella che dà il 3-toro, tranne che sull'asse $z$ dove trasla di 2 invece che di 1. Per mostrare $N$ è diffeomorfo al 3-toro basta quindi
+    osservare che $D$ è anche un dominio fondamentale per l'azione che dà il 3-toro, e che un dominio fondamentale per l'azione di $N$ è $D' = [-\frac{1}{2},\frac{1}{2}]\times [-\frac{1}{2},\frac{1}{2}]\times[0,2]$, diffeomorfo a $D$ tramite
+    $(x,y,z)\mapsto (x,y,2z)$. Questo induce il diffeomorfismo cercato.
+\end{proof}
+\textbf{Esercizio 2.5}
+Sia $M$ compatta ed $N$ connessa. Se $\dim M = \dim N$, mostra che ogni embedding $M\to N$ è un diffeomorfismo.
+\begin{proof}
+    Sia $f:M\to N$ un embedding. Poiché $M$ è compatto, $f(M)$ è compatto in $N$, e quindi chiuso; inoltre $f(M)$ è aperto in $N$ perché $f$ è liscia, ma essendo $N$ connessa, $f(M) = N$.
+
+    Inoltre, $f$ è un'immersione iniettiva tra spazi della stessa dimensione, che per il teorema d'invertibilità locale implica che $f$ è un diffeomorfismo locale.
+
+    Infine, per definizione $f$ è un omeomorfismo con l'immagine, e l'inversa continua $f^{-1}: N \to M$ è liscia in quanto $f$ è un diffeomorfismo locale.
+\end{proof}
+\textbf{Esercizio 3.1}
+Siano $v,v',w,w'\in V^*$ covettori non nulli.
+\begin{enumerate}
+    \item Se $v$ e $v'$ sono indipendenti, allora $v\otimes w$ e $v'\otimes w'$ sono vettori indipendenti in $\mathcal{T}^2(V)$.
+    \item Se inoltre anche $w$ e $w'$ sono indipendenti, allora
+        $$
+        v\otimes w+v'\otimes w' \in \mathcal{T}^2(V)
+        $$
+        non è un elemento puro.
+\end{enumerate}
+\begin{proof}\
+
+    \begin{enumerate}
+        \item Supponiamo per assurdo che esistano $\lambda,\mu\in\R$ tali che
+              \[
+                  \lambda(v\otimes w) + \mu(v'\otimes w') = 0,
+              \]
+              e supponiamo senza perdita di generalità che $\lambda\neq 0$. Allora, valutando entrambi i membri in $(x,y)\in V\times V$ otteniamo
+              \[
+                  \lambda v(x) w(y) + \mu v'(x) w'(y) = 0,
+              \]
+              ma per ipotesi esiste $\overline{y}\in V$ tale che $w(\overline{y})\neq 0$, e quindi
+              \[
+                  (\lambda w(\overline{y})) v(x) + (\mu w'(\overline{y})) v'(x) = 0
+              \]
+        contraddice l'indipendenza di $v$ e $v'$ (per la genericità di $x$).
+        \item Supponiamo per assurdo che $v\otimes w + v'\otimes w'$ sia un elemento puro, cioè che esistano $v'',w''\in V$ tale che
+              \begin{equation}\label{eq:assurdo}
+                  v''\otimes w'' = v\otimes w + v'\otimes w' .
+              \end{equation}
+              Ora, completando $\{v,v'\}$ e $\{w,w'\}$ a delle basi $\mathcal{B}=\{v_i\}$ e $\mathcal{C}=\{w_j\}$ di $V^*$, otteniamo una base di $\mathcal{T}^2(V)$ data da tutti i possibili prodotti tensoriali di
+              un elemento di $\mathcal{B}$ con uno di $\mathcal{C}$. In particolare, scrivendo in tale base il tensore $v''\otimes w''$ si ha
+              \[
+               v''\otimes w'' = \sum_{i,j} \lambda_i\mu_j v_i\otimes w_j,
+              \]
+              che per l'unicità di tale scrittura implica che $\mu_1\lambda_1 = \mu_2\lambda_2 = 1$ (visto che $v_1 = v$, $v_2 = v'$, $w_1 = w$ e $w_2 = w'$). Ma allora in
+              particolare \(
+              \mu_1\lambda_2\neq0 ,\) che contraddice \eqref{eq:assurdo}.
+    \end{enumerate}
+\end{proof}
+\textbf{Esercizio 3.2}
+Considera l'isomorfismo canonico $\mathcal{T}_1^1(V) = \Hom(V,V)$. Mostra che questo isomorfismo manda gli elementi puri in tutti e soli omomorfismi di rango $\leq 1$.
+\begin{proof}
+    Sia $v\otimes v^*\in\mathcal{T}_1^1(V)$ un elemento puro non nullo. Allora, detto $\varphi$ l'isomorfismo canonico, si ha
+    \[
+        \varphi(v\otimes v^*)(x) = v^*(x)v
+    \]
+    per ogni $x\in V$, e quindi $\varphi(v\otimes v^*)$ è un endomorfismo di rango 1.
+
+    Viceversa, se $\phi\in\Hom(V,V)$ è un endomorfismo di rango 1, allora presa una base $\{v_i\}$ di $V$ questa verrà mandata nello span
+    di un certo vettore $v\in V$, ovvero $\phi(v_i) = \lambda_i v$ per certi $\lambda_i\in\R$.
+    Quindi, ponendo $v^*(x) = \sum_i \lambda_i v_i^*(x)$ con $\{v_i^*\}$ base duale di $\{v_i\}$, si ha che $\phi$ è l'immagine di $v\otimes v^*$ tramite l'isomorfismo $\varphi$ in
+    quanto coincidono sulla base scelta:
+    \[
+        \varphi(v\otimes v^*)(v_i) = v^*(v_i)v = \lambda_i v = \phi(v_i).
+    \]
+\end{proof}
+\textbf{Esercizio 3.3}
+Siano $v^1, \ldots, v^k \in V^*$. Mostra che questi vettori sono indipendenti se e solo se $v^1\wedge \ldots \wedge v^k \neq 0$.
+\begin{proof}
+    Supponiamo che $v^1, \ldots, v^k$ siano dipendenti. Allora esistono $\lambda_1, \ldots, \lambda_k \in \R$ non tutti nulli tali che
+    \[
+        v^1 = \lambda_2 v^2 + \ldots + \lambda_k v^k,
+    \]
+    e sviluppando per multilinearità lungo la prima componente otteniamo che
+    \[
+        v^1\wedge v^2 \wedge \ldots \wedge v^k =  \sum_{i=2}^k \lambda_i v^i \wedge \ldots \wedge v^i \wedge \ldots \wedge v^k = 0.
+    \]
+    Viceversa, se $v^1, \ldots, v^k$ sono indipendenti, li possiamo completare a una base $\{v^i\}$ di $V^*$, e detta $\{v_i\}$ la base duale associata, abbiamo
+    \[
+        (v^1\wedge \ldots \wedge v^k) (v_1, \ldots, v_k) = 1 .
+    \]
+\end{proof}
+\end{document}
