@@ -11,6 +11,7 @@
 \usepackage{geometry}
 \usepackage{tikz-cd}
 \usepackage{enumitem}
+\usepackage{cancel}
 
 % Remove indentation globally
 \setlength{\parindent}{0pt}
@@ -79,6 +80,215 @@
 \author{Francesco Minnocci}
 \begin{document}
 \maketitle
-\section*{Prima Consegna}
-\textbf{Esercizio 4.}
+\section*{Seconda Consegna}
+\textbf{Esercizio 4.2}
+Mostra che il fibrato tangente $TM$ di una varietà $M$ è sempre orientabile, anche se $M$ non lo è.
+
+\begin{proof}
+    Sia $\mathcal{A}=\{\phi_i:U_i\to V_i\}$ un atlante per $M$. Sfruttando la struttura liscia dei fibrati tangenti, possiamo costruire un atlante per $TM$ tramite i differenziali delle $\phi_i$,
+    ovvero $\mathcal{A}^\prime=\{(\phi)_*:TU_i\to TV_i=V_i\times\R^n\}$; infatti le mappe di transizione sono lisce per funtorialità del differenziale.
+
+Vediamo che $\mathcal{A}^\prime$ è un atlante orientato: le mappe di transizione si scrivono come
+\begin{align*}
+    (\phi_j)_*\circ(\phi_i)_*^{-1}:(V_i\cap V_j)\times\R^n&\to(V_i\cap V_j)\times\R^n\\
+    (p,v)&\mapsto(\phi_j\circ\phi_i^{-1}(p),d(\phi_j\circ\phi_i^{-1})_p(v)),
+\end{align*}
+e posta $\psi := \phi_j\circ\phi_i^{-1}$, la matrice jacobiana di una tale mappa è triangolare inferiore a blocchi (come si vede dalla scrittura esplicita), con entrambi i blocchi
+diagonali uguali a $\det(d\psi_p)$, e quindi il suo determinante è positivo in quanto quadrato dello Jacobiano di $\psi$.
+\end{proof}
+
+\textbf{Esercizio 4.5}
+Dimostra l'identità di Jacobi: dati tre campi vettoriali $X,Y,Z$ su una varietà $M$, vale
+\begin{equation*}
+    [X,[Y,Z]] + [Y,[Z,X]] + [Z,[X,Y]] \equiv 0
+\end{equation*}
+
+\begin{proof}
+\begin{align*}
+    [X,[Y,Z]] + [Y,[Z,X]] + [Z,[X,Y]] &= (XY)Z - (YX)Z - Z(XY) + Z(YX) \\
+    &+ (YZ)X - (ZY)X - X(YZ) + X(ZY) \\
+    &+ (ZX)Y - (XZ)Y - Y(ZX) + Y(XZ) \\
+    &= 0
+\end{align*}
+\end{proof}
+
+\textbf{Esercizio 4.7}
+Sia $M$ una varietà, siano $X,Y$ campi vettoriali su $M$ ed $f,g\in C^\infty(M)$. Mostra che
+\begin{equation*}
+    [fX,gY] = fg[X,Y] + f(Xg)Y - g(Yf)X
+\end{equation*}
+
+\begin{proof}
+    Valutando il bracket in una funzione $h\in C^\infty(M)$ ed applicando la regola di Leibniz $X(fg) = (Xf)g + f(Xg)$, otteniamo
+\begin{align*}
+    [fX,gY]h &= fX(g\cdot Yh) - gY(f\cdot Xh) \\
+    &= (f\cdot Xg)Yh + g(fXYh) - (g\cdot Yf)Xh - f(gYXh) \\
+    &= fg[X,Y]h + f(Xg)Yh - g(Yf)Xh
+\end{align*}
+\end{proof}
+
+\textbf{Esercizio 5.1}
+Mostra che una distribuzione $D$ di rango 1 in una varietà $M$ è sempre integrabile.
+
+\begin{proof}
+    Per il Teorema di \textbf{Frobenius}, basta mostrare che la distribuzione $D$ è involutiva.
+    Preso un punto $p\in M$ ed un suo intorno banalizzante $U$, visto che $D_p$ ha rango 1 un suo frame locale è dato da un qualche campo vettoriale $Z$ mai nullo su $U$ (sezione di $D$).
+
+    Se $X,Y$ sono campi tangenti a $D$, localmente possiamo scriverceli come $X = fZ$ ed $Y = gZ$ per delle opportune funzioni lisce $f,g$. Allora, per l'esercizio 4.7 otteniamo
+
+    \begin{align*}
+        [X,Y] &= fg\cancel{[Z,Z]} + f(Zg)Z - g(Zf)Z \\
+        &= (f(Zg) - g(Zf))Z,
+    \end{align*}
+    che valutato in ogni punto $q$ di $U$ (intorno banalizzante di $p$) finisce nello span di $Z(q)$, ovvero $D_q$; quindi $D$ è involutiva.
+\end{proof}
+
+\textbf{Esercizio 5.4}
+Mostra che gli unici sottogruppi di Lie connessi di $SO(3)$ sono l'identità, $SO(3)$, e i sottogruppi isomorfi ad $S^1$ che descrivono le rotazioni intorno a un asse.
+
+\begin{proof}
+    Per usare il teorema di corrispondenza fra sottogruppi di Lie connessi e sottoalgebre di Lie, partiamo col classificare le sottoalgebre di Lie di $\mathfrak{so}(3) = \{X\in M_3(\R) \mid X^T = -X\}$.
+    Visto che un base di
+    $\mathfrak{so}(3)$ è data dalle matrici
+    \begin{align*}
+        X_1 = \begin{pmatrix}
+            0 & 0 & 0 \\
+            0 & 0 & -1 \\
+            0 & 1 & 0
+        \end{pmatrix}, \quad
+        X_2 = \begin{pmatrix}
+            0 & 0 & 1 \\
+            0 & 0 & 0 \\
+            -1 & 0 & 0
+        \end{pmatrix}, \quad
+        X_3 = \begin{pmatrix}
+            0 & -1 & 0 \\
+            1 & 0 & 0 \\
+            0 & 0 & 0
+        \end{pmatrix},
+    \end{align*}
+    mandando $X_i$ in $e_i$ si verifica che il bracket su $\mathfrak{so}(3)$ coincide con il prodotto vettoriale su $\R^3$, producendo quindi un isomorfismo di algebre di Lie. In
+    tal modo risulta evidente che non ci siano sottoalgebre di dimensione 2, visto che il prodotto vettoriale di due vettori indipendenti dà un terzo vettore ortogonale a questi
+    due, generando tutto $\R^3$.
+
+    Perciò, escludendo l'identità ed $\mathfrak{so}(3)$ (che corrispondono rispettivamente ai sottogruppi di Lie $\{I\}$ ed $SO(3)$ stesso), ci siamo ridotti a mostrare che l'algebra di Lie
+    di un sottogruppo $H$ di
+    rotazioni intorno a un asse è del tipo $\mathfrak{h}=\{tM \mid t\in\R\}$ per una qualche $M\in\mathfrak{so}(3)$.
+
+    Mostriamo preliminarmente che $\{\exp(tM) \mid t\in\R\}$ è un
+    sottogruppo di Lie di $SO(3)$ isomorfo ad un tale $H$: infatti è l'immagine di $\mathfrak{h}$ tramite la restrizione della mappa esponenziale (visto che questa coincide con
+    l'esponenziale di matrice sui sottogruppi di $GL(n)$), ma per corrispondenza esiste un sottogruppo di Lie con algebra di Lie $\mathfrak{h}$, e per la teoria della mappa
+    esponenziale deduciamo che tale sottogruppo è proprio l'immagine della sua algebra tramite l'esponenziale, che è quindi un onesto sottogruppo di Lie.
+    Più esplicitamente, l'esponenziale applicato della matrice
+    $X_1$ di cui
+    sopra produce una matrici di rotazione attorno ad $e_3$ (escono fuori gli sviluppi in serie di Taylor del seno e del coseno), e quindi $\{\exp(tM) \mid t\in\R\}$ è
+    un sottogruppo di rotazioni intorno ad un asse perché $M$ è sempre simile ad un multiplo di $X_1$ (basta usare la forma normale di Jordan di $M$).
+
+    Inoltre, per costruzione della mappa esponenziale è chiaro che l'algebra di Lie di $\{\exp(tM) \mid t\in\R\}$ sia $\mathfrak{h}$, e quindi abbiamo finito.
+\end{proof}
+
+\textbf{Esercizio 5.6}
+Sia $\pi: E\to M$ un fibrato vettoriale. Mostra che $\pi$ è un'equivalenza omotopica.
+
+\begin{proof}
+L'inversa omotopica che cerchiamo è la sezione nulla $s_0:M\to E$:
+\begin{align*}
+    \begin{cases}
+        \pi\circ s_0 = \id_M \\
+        s_0\circ\pi \sim \id_E
+    \end{cases}
+\end{align*}
+
+La prima relazione vale per definizione di $s_0$, in quanto manda ogni punto $p$ di $M$ in $(p,0)\in E_p$.
+Per la seconda, costruiamo una omotopia $H:E\times I\to E$ fra $s_0\circ\pi$ ed $\id_E$ ponendo $H(e,t) = t\cdot e$, che è ben posta in quanto $E_p$ è uno
+spazio vettoriale per ogni $p\in M$. Vediamo che è liscia: su un intorno banalizzante $U$ di $p$, se $E$ ha rango $k$ possiamo scrivere $H$ localmente come
+\begin{align*}
+    H:(U\times \R^k) \times I &\to U\times \R^k \\
+    ((p,v),t) &\mapsto (p,t\cdot v),
+\end{align*}
+
+che è chiaramente liscia.
+\end{proof}
+
+\textbf{Esercizio 6.1}
+Sia $M$ una varietà con bordo ed $N$ una varietà senza bordo. Mostra che $M\times N$ ha una naturale struttura di varietà con bordo, e che $\partial(M\times N)$ è diffeomorfo a $\partial M\times N$.
+
+\begin{proof}
+    Sicuramente il prodotto $M\times N$ è uno spazio topologico Hausdorff e secondo-numerabile. Se $\operatorname{dim}M = m$ e $\operatorname{dim}N = n$,  presi $\mathcal{A}= \{\phi_i:U_i\to V_i\}$ un $\R^m_+$-atlante per $M$ e $\mathcal{B}=\{\psi_j:W_j\to Z_j\}$ un atlante di $N$, l'insieme
+    \[
+        \{(\phi_i\times\psi_j):U_i\times W_j\to V_i\times Z_j\}
+    \]
+    è un atlante per $M\times N$: infatti $V_i\times Z_j$ è un aperto di $\R^m_+\times\R^n = \R^{m+n}_+$, e le mappe di transizione sono lisce per funtorialità del prodotto.
+
+    Per quanto riguarda il bordo di $M\times N$, per definizione è dato dai punti che finiscono in $\partial \R^{m+n}_+$ tramite una qualche carta, quindi basta osservare che
+    \[
+        \partial (\R^m_+\times\R^n) = \partial \R^m_+\times\R^n,
+    \]
+    e che le carte di $\partial M \times N$ hanno valori in aperti del termine a destra.
+
+% jump to next page
+\pagebreak
+
+\end{proof}
+
+\textbf{Esercizio 6.4}
+Mostra che una $n$-varietà $M$ è orientabile $\iff$ esiste una $n$-forma mai nulla su $M$.
+
+\begin{proof} (svolto in collaborazione con Ludovico Piazza)
+
+    Se $M$ è orientabile, per la Proposizione \textbf{7.2.15} delle dispense esiste una forma volume $\omega$ su $M$, che è mai nulla per definizione essendo strettamente positiva su ogni
+    base positiva del tangente in un punto.
+
+    Viceversa, se esiste una $n$-forma $\omega$ mai nulla su $M$, possiamo definire un'orientazione sui tangenti come segue: preso $p\in M$, esistono $v_1,\ldots,v_n\in T_pM$ tali
+    che $\omega(p)(v_1,\ldots,v_n)$ è non nullo, ma in particolare questa deve essere una base del tangente, in quanto se ci fosse una relazione di dipendenza lineare, ad esempio $v_n = \sum_{i=1}^{n-1}\lambda_i v_i$, allora
+    \[
+        \omega(p)(v_1,\ldots,v_n) = \omega(p)(v_1,\ldots,v_{n-1},\sum_{i=1}^{n-1}\lambda_i v_i) = \sum_{i=1}^{n-1}\lambda_i\omega(p)(v_1,\ldots,v_i,\ldots,v_i) = 0
+    \]
+    per l'alternanza di $\omega$.
+
+    A meno di cambiare segno al primo vettore della base, possiamo supporre che $\omega(p)(v_1,\ldots,v_n)$ sia strettamente positivo; poniamo quindi come orientazione positiva di
+    $T_pM$ la classe di equivalenza di tale base.
+    Osserviamo anche che, data un'altra base positiva $w_1,\ldots,w_n$ di $T_pM$, la matrice $A$ di cambio di base ha
+    determinante positivo, e quindi $\omega(p)(w_1,\ldots,w_n) = \det(A)\omega(p)(v_1,\ldots,v_n) > 0$.
+
+    Verifichiamo ora che tale scelta di orientazione è "localmente continua", cioè che per ogni $p\in M$ esiste una carta definita su un qualche intorno $U$ di $p$ il cui
+    differenziale manda basi positive in basi positive.
+
+    Preso un atlante $\mathcal{A}=\{\varphi_i:U_i\to \R^n\}$ per $M$, se fissiamo un punto $p\in M$ ed una
+    carta $\varphi:
+    U\to \R^n$ con $p\in U$, possiamo supporre che $d\varphi_p$ preservi l'orientazione di $T_pM$ (altrimenti componiamo la carta con una riflessione di $\R^n$). Leggendo $\omega$ in
+    carte tramite $\varphi$, otteniamo una $n$-forma su $\R^n$
+    \[
+        \varphi_*\omega = f\cdot dx^1\wedge\ldots\wedge dx^n
+    \]
+    per qualche $f\in C^\infty(\R^n)$. Adesso, $f (\varphi (p)) > 0$ visto che per ogni base positiva $v_1,\ldots,v_n$ di $T_pM$ si ha
+    \begin{align*}
+        \omega (p)(v_1,\ldots,v_n) &= \varphi_*\omega(p)(d\varphi_p(v_1),\ldots,d\varphi_p(v_n))\\
+        &= f(\varphi(p))\cdot (dx_1\wedge\ldots\wedge dx_n)(d\varphi_p(v_1),\ldots,d\varphi_p(v_n)) > 0
+    \end{align*}
+(essendo $dx_1\wedge\ldots\wedge dx_n$ strettamente positiva su basi positive di $\R^n$), e quindi possiamo supporre che $f\circ\varphi$ sia strettamente positiva su un qualche intorno $V\subset U$ di $p$.
+
+    Questo implica che $d\varphi_q$ manda basi positive in basi positive per ogni $q\in V$: infatti per costruzione una base $w_1,\ldots,w_n$ di $T_qM$ è positiva se
+    \begin{align*}
+        \omega (q)(w_1,\ldots,w_n) &= \varphi_*\omega(q)(d\varphi_q(w_1),\ldots,d\varphi_q(w_n)) \\
+        &= f(\varphi(q))\cdot (dx_1\wedge\ldots\wedge dx_n)(d\varphi_q(w_1),\ldots,d\varphi_q(w_n))
+    \end{align*}
+    è strettamente positivo, ma dato che $f(\varphi(q))>0$ deduciamo che $\{d\varphi_q(w_1),\ldots,d\varphi_q(w_n)\}$ è una base positiva di $\R^n$.
+\end{proof}
+
+\textbf{Esercizio 6.6}
+Sia $M$ varietà qualsiasi ed $N$ varietà non orientabile. Il prodotto $M\times N$ può essere orientabile?
+
+\begin{proof} (svolto in collaborazione con Ludovico Piazza)
+
+    La risposta alla domanda è \textit{no}: mostriamo infatti che se $M\times N$ è orientabile allora $N$ è necessariamente orientabile.
+
+    Per l'esercizio \textbf{6.4}, esiste una forma mai nulla $\omega$ su $M\times N$. Puntualmente, tale forma è non nulla su ogni base del tangente del prodotto, analogamente all'esercizio
+    precedente. Fissato quindi $p\in M$ ed una base $\{v_1,\ldots,v_m\}$ di $T_pM$, possiamo definire una forma $\mu$ su $N$ (che identifichiamo con $\{p\}\times N  \subset M\times N$)
+    come
+    \[
+        \mu(q)(w_1,\ldots,w_n) = \omega((p,q))(v_1,\ldots,v_m,w_1,\ldots,w_n),
+    \]
+    che è mai nulla per costruzione e quindi (sempre per l'esercizio precedente) otteniamo che $N$ è orientabile.
+\end{proof}
 \end{document}

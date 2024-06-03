@@ -1,0 +1,331 @@
+\documentclass[a4paper]{article}
+
+\usepackage[T1]{fontenc}
+\usepackage{textcomp}
+\usepackage[italian]{babel}
+\usepackage{hyperref}
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{mathtools}
+% for \lightning
+\usepackage{stmaryrd}
+\usepackage{geometry}
+\usepackage{tikz-cd}
+\usepackage{enumitem}
+\usepackage{cancel}
+
+% Remove indentation globally
+\setlength{\parindent}{0pt}
+% Have blank lines between paragraphs
+\usepackage[parfill]{parskip}
+
+\hypersetup{
+	colorlinks = true, % links instead of boxes
+	urlcolor   = blue, % external hyperlinks
+	linkcolor  = blue, % internal links
+	citecolor  = red   % citations
+}
+
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\A}{\mathbb{A}}
+\newcommand{\Z}{\mathbb{Z}}
+\renewcommand{\P}{\mathbb{P}}
+
+\newcommand{\id}{\operatorname{id}}
+\newcommand{\Hom}{\operatorname{Hom}}
+
+\newcommand{\ssfrac}[2]{
+    \raisebox{+0.3ex}{$#1$}
+    /
+    \raisebox{-0.3ex}{$#2$}
+}
+
+\newcommand{\sfrac}[2]{
+    \raisebox{+0.3ex}{\scalebox{0.9}{$#1$}}
+    /
+    \raisebox{-0.3ex}{\scalebox{0.9}{$#2$}}
+}
+
+\newcommand\restr[2]{{% we make the whole thing an ordinary symbol
+  \left.\kern-\nulldelimiterspace % automatically resize the bar with \right
+  #1 % the function
+  \vphantom{\big|} % pretend it's a little taller at normal size
+  \right|_{#2} % this is the delimiter
+  }}
+
+\renewcommand{\labelitemii}{$\circ$}
+\renewcommand{\Im}{\operatorname{Im}}
+
+\newcommand\numberthis{\addtocounter{equation}{1}\tag{\theequation}}
+
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}{Lemma}[section]
+
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}[section]
+
+\theoremstyle{definition}
+\newtheorem{example}{Example}[section]
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Osservazione}
+
+\theoremstyle{definition}
+\newtheorem*{exercise}{Esercizio}
+
+\title{Istituzioni di Geometria 2023/2024}
+\author{Francesco Minnocci}
+\begin{document}
+\maketitle
+\section*{Terza Consegna}
+\textbf{Esercizio 7.1}
+Considera il toro $T = S^1 \times S^1$ con coordinate $(\theta_1, \theta_2)$ definite a meno di $+2k\pi$ e la 1-forma $\omega = d\theta_1$. Considera la 1-sottovarietà $\gamma_i = \{\theta_i = 0\}$ per $i = 1, 2$, orientata come $S^1$. Mostra che
+\[
+    \int_{\gamma_1} \omega = 0,\quad\int_{\gamma_2} \omega = 2\pi.
+\]
+
+\begin{proof}
+    Ricordando che nel calcolare l'integrale di una forma possiamo permetterci di rimuovere un insieme di misura nulla dal dominio di integrazione, ci restringiamo ad integrare lungo le 1-sottovarietà $\gamma_i \setminus \{(0, 0)\}$, per cui
+    \[
+        \begin{aligned}
+            \int_{\gamma_1} \omega & = \int_{\gamma_1 \setminus \{(0, 0)\}} d\theta_1 = \int_{\{0\} \times (0, 2\pi)} d\theta_1 = 0,    \\
+            \int_{\gamma_2} \omega & = \int_{\gamma_2 \setminus \{(0, 0)\}} d\theta_1 = \int_{(0, 2\pi) \times \{0\}} d\theta_1 = 2\pi.
+        \end{aligned}
+    \]
+\end{proof}
+
+\textbf{Esercizio 7.3}
+Sia $f : U \to V$ una mappa liscia fra aperti $U \subset \R^m$ e $V \subset \R^n$. Scriviamo $f = (f_1, \ldots, f_n)$. Per non confonderci usiamo variabili diverse $(x^1, \ldots, x^n) \in \R^n$ e $(y^1, \ldots, y^m) \in \R^m$. Mostra che
+\[
+    f^*(dx^i) = \frac{\partial f_i}{\partial y^j} dy^j = df_i.
+\]
+\begin{proof}
+    Per ogni $p\in \R^m$ e $v\in T_p\R^m$ si ha
+    \[
+        f^*(dx^i)_p(v) = dx^i_{f(p)}(df_p(v)) = (df_p(v))_i = \frac{\partial f_i}{\partial y^j}(p) \cdot dy^j(v) = \left(\frac{\partial f_i}{\partial y^j} dy^j\right)_p(v) = (df_i)_p(v).
+    \]
+\end{proof}
+
+\textbf{Esercizio 7.4}
+Sia $\varphi : M \to N$ una mappa liscia fra varietà e $\omega \in \Omega^k(N)$.
+Otteniamo
+\[
+    d(\varphi^*\omega) = \varphi^*(d\omega).
+\]
+\begin{proof}
+    Mostriamo preliminarmente che $d(\varphi^*f) = \varphi^*(df)$ per $f\in C^\infty(N)$: infatti, per ogni $p\in M$ e $v\in T_pM$ si ha
+    \[
+        d(\varphi^*f)(v)=v(\varphi^*f)=\varphi_*(v)(f)=df(\varphi_*(v))=\varphi^*(df)(v),
+    \]
+    dove $\varphi_*$ è la mappa indotta da $\varphi$ sui tangenti.
+    Osserviamo inoltre che dalla formula di Leibniz segue che $$d(f \cdot \omega) = df \wedge \omega + f \cdot d\omega$$ per ogni $f\in C^\infty(N)$ e $\omega\in \Omega^k(N)$.
+    Ora, scriviamo $\omega$ in carte rispetto ad una base di $\Omega^k(N)$
+    \[
+        \omega = \sum_{i_1<\ldots<i_k} f_{i_1\ldots i_k} dx^{i_1}\wedge \ldots \wedge dx^{i_k},
+    \]
+    e per linearità supponiamo che $\omega = f dx^I$ con $dx^I:=dx^{i_1}\wedge \ldots \wedge dx^{i_k}$. Allora, notando che $$\varphi^*(\omega) = \varphi^*(f) \cdot \varphi^*(dx^I),$$
+    otteniamo
+    \[
+        \begin{aligned}
+            d(\varphi^*\omega) & = d(\varphi^*(f) \cdot \varphi^*(dx^I)) = d(\varphi^*f) \wedge \varphi^*(dx^I) + \varphi^*f \cdot \cancel{d(\varphi^*(dx^I))} \\
+                               & = \varphi^*(df) \wedge \varphi^*(dx^I) = \varphi^*(df \wedge dx^I) = \varphi^*(d\omega),
+        \end{aligned}
+    \]
+    dove abbiamo usato il fatto che $\varphi^*(\omega\wedge\eta)=\varphi^*(\omega)\wedge\varphi^*(\eta)$.
+\end{proof}
+
+\textbf{Esercizio 8.1}
+Mostra che per qualsiasi successione esatta di spazi vettoriali finito dimensionali
+\[
+    0 \to V_1 \overset{f_1}{\to} V_2 \overset{f_2}{\to} \cdots \overset{f_{k-1}}{\to} V_k \to 0
+\]
+vale la relazione
+\[
+    \sum_{i=1}^k (-1)^i \dim V_i = 0.
+\]
+Deduci il fatto seguente. Sia $M = U \cup V$ varietà con $U, V$ aperti. Supponiamo che i numeri di Betti di $U \cap V, U, V, M$ siano tutti finiti. Allora
+\[
+    \chi(M) = \chi(U) + \chi(V) - \chi(U \cap V).
+\]
+\begin{proof}
+    Dalla formula delle dimensioni segue che $$\dim V_i = \dim \ker f_i + \dim \Im f_{i}$$ per $1\leq i<k$. D'altro canto, poichè la successione è esatta abbiamo $$\Im f_{i} = \ker
+        f_{i+1},$$
+    sempre per $1\leq i<k$ (ponendo $f_k$ uguale alla mappa nulla). Dunque,
+    \[
+        \begin{aligned}
+            \sum_{i=1}^k (-1)^i \dim V_i & = \sum_{i=1}^{k-1} (-1)^i (\dim \ker f_i + \dim \ker f_{i+1}) + (-1)^k \dim V_k \\
+                                         & = -\dim \ker f_1 + (-1)^{k-1} \dim \ker f_k + (-1)^k \dim V_k                   \\
+                                         & = 0
+        \end{aligned}
+    \]
+    visto che i termini in mezzo si cancellano due a due, e che per esattezza valgono $\ker f_1 = 0$ e $\ker f_k = V_k$.
+
+    Per quanto riguarda la seconda parte, osserviamo che per Mayer-Vietoris abbiamo una successione esatta lunga in coomologia
+    \[
+        \cdots \to H^i(M) \to H^i(U) \oplus H^i(V) \to H^i(U \cap V) \to H^{i+1}(M) \to \cdots
+    \]
+    ed visto che i numeri di Betti sono finiti applichiamo la formula appena dimostrata (ponendo $n = \dim M$):
+    \[
+        \begin{aligned}
+            0 & = \sum_{i=0}^{n} (-1)^{i+1} \left(b_i(M) - b_i(U) - b_i(V) + b_i(U \cap V)\right)                                                                  \\
+              & = \sum_{i=0}^{n} (-1)^{i+1} b_i(M) - \sum_{i=0}^{n} (-1)^{i+1} b_i(U) - \sum_{i=0}^{n} (-1)^{i+1} b_i(V) + \sum_{i=0}^{n} (-1)^{i+1} b_i(U \cap V) \\
+              & = -\chi(M) + \chi(U) + \chi(V) - \chi(U \cap V),
+        \end{aligned}
+    \]
+    da cui la tesi.
+\end{proof}
+\textbf{Esercizio 8.4}
+Sia $K \subset S^3$ un nodo. Mostra che $H^1(S^3 \setminus K) \cong \R$.
+
+\begin{proof}
+    Consideriamo $U=S^3\setminus K$ e $V$ un intorno tubolare di $K$. Allora, $U\cup V=S^3$ e $U\cap V$ è omotopicamente equivalente ad un toro: infatti,
+    l'intorno tubulare è il fibrato normale di un embedding di $S^1$, ma deve essere orientabile in quanto aperto di una 3-varietà orientabile ed è quindi banale (in altre parole, è il toro pieno).
+
+    Per Mayer-Vietoris, abbiamo una successione esatta lunga in coomologia
+    \[
+        H^1(S^3)=0 \to H^1(U) \oplus H^1(V) \to H^1(U \cap V) \to H^2(S^3) = 0
+    \]
+    e calcolando ogni termine otteniamo (visto che $V$ è omotopicamente equivalente ad $S^1$)
+    \[
+        0 \to H^1(U) \oplus \R \to \R^2 \to \R \to 0
+    \]
+    da cui per l'esercizio precedente
+    \[
+        0=b^1(U)+1-2+1-2+1,
+    \]
+    e quindi $b^1(U)=1$.
+\end{proof}
+\textbf{Esercizio 8.6}
+Sia $M$ una varietà connessa e $p \in M$ un punto. Costruisci un morfismo iniettivo di spazi vettoriali
+\[
+    H^1(M) \to \Hom(\pi_1(M, p), \R).
+\]
+Deduci che se $M$ è semplicemente connessa allora $b^1(M) = 0$.
+\begin{proof}
+    Dato $\alpha\in H^1(M)$, sia $\omega \in \Omega^1(M)$ un rappresentante di $\alpha$, e $[\gamma] \in \pi_1(M, p)$ con $\gamma$ un rappresentante liscio di $[\gamma]$. Allora, l'applicazione
+    \[
+        \begin{aligned}
+            H^1(M) & \longrightarrow \Hom(\pi_1(M, p), \R)                          \\
+            \alpha & \longmapsto \left([\gamma] \mapsto \int_{\gamma} \omega\right)
+        \end{aligned}
+    \]
+    è ben definita, in quanto se $\gamma \sim \tau$ allora $\int_{\gamma} \omega = \int_{\tau} \omega$ essendo $\omega$ una forma chiusa; e se cambiamo rappresentante
+    di $\alpha$ allora $\omega$ varia di una forma esatta $d \eta$, su cui
+    \[
+        \int_{\gamma} d\eta = \int_{\partial \gamma} \eta = 0
+    \]
+    per il teorema di Stokes, in quanto stiamo integrando su una 1-varietà compatta che è necessariamente orientabile.
+    Inoltre, è lineare in quanto l'integrale lo è.
+
+    Per quanto riguarda l'iniettività, se $\int_{\gamma} \omega = 0$ per ogni loop $\gamma$ basato in $p$, vorremmo trovare una $0$-forma $\eta$ tale che $\omega = d\eta$ (così che
+    $\alpha = 0$ in coomologia).
+
+    Dopodichè, Costruiamo $\eta$ come segue: preso $x\in M$, sia $\gamma_{px}$ un cammino tale che $\gamma_{px}(0)=p$ e $\gamma_{px}(1)=x$ e definiamo
+    \[
+        \eta(x) = \int_{\gamma_{px}} \omega
+        .\]
+    Tale assegnamento è ben posto, in quanto se $\tau_{px}$ è un'altro tale cammino, allora per ipotesi
+    \[
+        \int_{\gamma_{px}} \omega - \int_{\tau_{px}} \omega = \int_{\gamma_{px}\ast(\tau_{px})^{-1} } \omega = 0
+    \]
+    visto che $(\tau_{px})^{-1}\ast \gamma_{px}$ è un loop basato in $p$; inoltre $\eta$ è liscia e definita su tutto $M$ in quanto $M$ è connessa.
+
+    Infine, mostriamo che
+    \(
+    d\eta = \omega
+    \): se $q\in M$, $v\in T_qM$ e $\gamma$ è una curva con $\gamma(0)=q$ e $\gamma^\prime(0)=v$, allora
+    \[
+        \begin{aligned}
+            d\eta_q(v) & =\lim_{t\to 0} \frac{\eta(\gamma(t))-\eta(\gamma(0))}{t}                                \\
+                       & = \lim_{t\to 0} \frac{\int_{\gamma_{p\gamma(t)}} \omega - \int_{\gamma_{pq}} \omega}{t} \\
+                       & = \lim_{t\to 0} \frac{\int_{\gamma_{|_{[0, t]}}} \omega}{t}                             \\
+                       & = \lim_{t\to 0} \frac{\int_{0}^{t} \omega_{\gamma(t)}(\gamma^\prime(t)) dt}{t}          \\
+                       & = \omega_{\gamma(0)}(\gamma^\prime(0)) = \omega_q(v).
+        \end{aligned}
+    \]
+    Se $M$ è semplicemente connessa, allora $\pi_1(M, p) = 0$ e quindi $\Hom(\pi_1(M, p), \R) = 0$, da cui $H^1(M) = 0$ per l'iniettività della mappa appena costruita.
+\end{proof}
+
+\textbf{Esercizio 9.4}
+Sia $T = S^1 \times S^1$ il toro e $p \in T$ un punto. Considera la 4-varietà $M = T \times T$ e le sottovarietà $N_1 = T \times \{p\}$ e $N_2 = \{p\} \times T$. Calcola i gruppi di coomologia di
+\[
+    X = M \setminus (N_1 \cup N_2).
+\]
+\begin{proof}
+    Insiemisticamente, abbiamo che $$X=(T \setminus \{p\}) \times (T \setminus \{p\}).$$
+    Inoltre, $$H^0(T)=H^2(T)=\R$$ per dualità di Poincaré, essendo il toro una 2-varietà compatta connessa ed orientabile, e per la formula di Künneth sappiamo che
+    $$H^1(T)=H^1(S^1) \otimes H^0(S^1) \oplus H^0(S^1) \otimes H^1(S^1)=\R^2.$$
+    Per l'esercizio 9.1, abbiamo che i gruppi di coomologia di $T
+        \setminus \{p\}$ sono
+    \[
+        \begin{cases}
+            H^0(T \setminus \{p\}) = \R   \\
+            H^1(T \setminus \{p\}) = \R^2 \\
+            H^2(T \setminus \{p\}) = 0
+        \end{cases}
+    \]
+    Applicando di nuovo la formula di Künneth, otteniamo
+    \[
+        \begin{cases}
+            H^0(X) = \R                                             \\
+            H^1(X) = \R^2\otimes\R \oplus \R\otimes\R^2 = \R^4      \\
+            H^2(X) = \R^2\otimes \R^2= \R^2\otimes(\R\oplus\R)=\R^4 \\
+            H^3(X) = 0                                              \\
+            H^4(X) = 0
+        \end{cases}
+    \]
+\end{proof}
+
+\textbf{Esercizio 9.5}
+Siano $M$ e $N$ varietà con coomologia finito-dimensionale. Dimostra che
+\[
+    \chi(M \times N) = \chi(M) \cdot \chi(N).
+\]
+\begin{proof}
+    Per definizione di caratteristica di Eulero, abbiamo
+    \[
+        \begin{aligned}
+            \chi(M \times N) & = \sum_{i=0}^{m+n} (-1)^i b^i(M \times N) \overset{\star}{=} \sum_{i=0}^{m+n} (-1)^i \sum_{j=0}^{i} b^j(M) b^{i-j}(N) \\
+                             & = \sum_{i=0}^{n+m} \sum_{j=0}^{i} (-1)^i b^j(M) b^{i-j}(N) =  \sum_{k=0}^{m+n}\sum_{i+j=k} (-1)^k b^i(M) b^j(N)       \\
+                             & = \left(\sum_{i=0}^{m} (-1)^i b^i(M)\right)\cdot \left(\sum_{j=0}^{n} (-1)^j b^j(N)\right) = \chi(M) \cdot \chi(N),
+        \end{aligned}
+    \]
+    dove l'uguaglianza $\star$ segue dalla formula di Künneth.
+\end{proof}
+
+\textbf{Esercizio 9.6} (svolto in collaborazione con Ludovico Piazza)
+Sia $M$ una varietà connessa senza bordo e $N \subset M$ un'ipersuperficie senza bordo connessa e chiusa. Mostra che $M \setminus N$ ha una o due componenti connesse. Descrivi degli esempi in entrambi i casi. Mostra che se $M$ è orientabile e $N$ non è orientabile allora $M \setminus N$ è connessa.
+
+\begin{proof}
+    Utilizziamo Mayer-Vietoris con gli aperti $U=M\setminus N$ e $V=\nu N$ un intorno tubolare di $N$. Allora, $U\cup V=M$ e per Mayer-Vietoris otteniamo una successione esatta
+    \[
+        0\to H^0(M)\to H^0(U)\oplus H^0(V)\to H^0(U\cap V),
+    \]
+    e visto che $V$ è omotopicamente equivalente ad $N$ questa diventa
+    \[
+        0\to \R\to H^0(M\setminus N)\oplus \R\overset{f}{\to} H^0(\nu N\setminus N).
+    \]
+    Adesso ci basta mostrare che $U\cap V=V\setminus N$ ha al più due componenti connesse: poi, per esattezza più la formula delle dimensioni avremmo
+    \[
+        b^0(M\setminus N)+1=\dim \ker f + \dim \Im f = 1 + \dim \Im f\leq 1+2=3 ~\implies b^0(M\setminus N)\leq 2.
+    \]
+
+    D'altronde, su un intorno banalizzante $U(p)$ di $p\in N$ sappiamo che $\nu N \setminus N$ ha due componenti connesse, essendo $\nu N$ un fibrato in rette; mostriamo ora che da
+    $\nu U \setminus N$ riusciamo a raggungere ogni punto di $\nu N \setminus N$. Infatti, se poniamo
+    \[
+        W := \{p\in N \mid \exists \text{ un cammino che raggiunge } \nu_p{N}\setminus N \text{ da } \nu U\setminus N\},
+    \]
+    allora $W$ è aperto e chiuso in $N$: infatti, ogni punto $p\in W$ ha un intorno banalizzante che mostra che $W$ è aperto; d'altra parte, preso un punto $q$ nella chiusura di
+    $W$ un suo intorno banalizzante interseca $W$ per definizione di chiusura, e quindi testimonia la raggiungibilità di $\nu_q N\setminus N$ a partire
+    da $\nu U \setminus N$.
+    Quindi $W=N$, e quindi $\nu U \setminus N$ ha al più due componenti connesse.
+
+    Per quanto riguarda gli esempi: se prendiamo $M=S^1\times S^1$ ed $N=\{p\}\times S^1$, allora $M\setminus N$ ha una sola componente connessa; mentre invece il complementare di una curva chiusa dentro $\R^2$ ha due componenti connesse.
+
+    Ora, se $M$ è orientabile ed $N$ no, supponiamo per assurdo che $M\setminus N$ sia sconnessa. Allora, per il punto precedente $M\setminus N$ ha esattamente due componenti connesse. Fissata una delle due componenti, detta $N^+$, e presa una metrica Riemanniana possiamo costruire una sezione non nulla del fibrato normale $\nu N$ (che ha rango 1) scegliendo per ogni $p\in N$ il vettore di norma unitaria di $\nu N$ che si trova in $N^+$, il che mostra che $\nu N$ è banale e per la Proposizione 5.6.7 delle dispense $N$ è orientabile, assurdo.
+\end{proof}
+
+\end{document}
