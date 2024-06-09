@@ -81,5 +81,55 @@
 \begin{document}
 \maketitle
 \section*{Quarta Consegna}
-\textbf{Esercizio 10.?}
+\textbf{Esercizio 10.7}
+Sia $G$ un gruppo di Lie. Mostra che esiste sempre una metrica riemanniana su $G$ invariante a sinistra, cioè tale che $L_g : G \to G$ sia un'isometria per ogni $g \in G$.
+\begin{proof}
+Sia $n$ la dimensione di $G$. Possiamo identificare $\mathfrak{g}=T_eG$ con $\R^n$ fissandone una base, ed usare la metrica euclidea standard su $\R^n$ per
+definire un prodotto scalare $\langle \cdot, \cdot \rangle_e$ su $T_eG$.
+
+Se poi $g \in G$ e $v, w \in T_gG$, possiamo estendere il prodotto scalare definito su $T_eG$ per traslazione, cioè ponendo
+\[
+\langle v, w \rangle_g = \langle (dL_{g^{-1}})_g(v), (dL_{g^{-1}})_g(w) \rangle_e
+\]
+Per costruzione, $\langle \cdot, \cdot \rangle_g$ è invariante a sinistra:
+\[
+\langle (dL_g)_h(v), (dL_g)_h(w) \rangle_{gh} = \langle v, w \rangle_h
+\]
+per ogni $g, h \in G$ e $v, w \in T_hG$.
+
+\end{proof}
+
+\textbf{Esercizio 10.2}
+%Considera il piano iperbolico nel modello del semipiano:
+%H2 =
+%�
+%(x, y) ∈R2 | y > 0
+%�
+%,
+%g = 1
+%y 2 gE.
+%Calcola l’area del dominio
+%[−a, a] × [b, ∞)
+%per ogni a, b > 0. L’area è ovviamente quella indotta dalla forma volume della
+%varietà riemanniana H2.
+
+Considera il piano iperbolico nel modello del semipiano:
+\[
+H^2 = \{(x, y) \in \R^2 \mid y > 0\}, \quad g = \frac{1}{y^2} \, g_E
+\]
+Calcola l'area del dominio
+\[
+[-a, a] \times [b, \infty)
+\] per ogni $a, b > 0$. L'area è ovviamente quella indotta dalla forma volume della varietà riemanniana $H^2$.
+\begin{proof}
+La forma volume indotta dalla metrica $g$ sul piano iperbolico è
+\[
+    \omega = \frac{1}{y^2} \, dx \wedge dy
+.\]
+L'area di $A:=[-a, a] \times [b, \infty)$ è quindi
+\[
+    \int_A \omega = \int_A \frac{1}{y^2} \, dx \wedge dy
+    \int_{b}^{\infty} \int_{-a}^{a} \frac{1}{y^2} \, dx \, dy = 2a\cdot \int_{b}^{\infty} \frac{1}{y^2} \, dy = 2a \left[ -\frac{1}{y} \right]_{b}^{\infty} = \frac{2a}{b}
+.\]
+\end{proof}
 \end{document}
