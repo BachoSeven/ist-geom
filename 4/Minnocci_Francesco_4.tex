@@ -81,38 +81,40 @@
 \begin{document}
 \maketitle
 \section*{Quarta Consegna}
-\textbf{Esercizio 10.7}
-Sia $G$ un gruppo di Lie. Mostra che esiste sempre una metrica riemanniana su $G$ invariante a sinistra, cioè tale che $L_g : G \to G$ sia un'isometria per ogni $g \in G$.
+\textbf{Esercizio 10.1}
+Considera lo spazio iperbolico nel modello del semispazio:
+\[
+    H^n = \{x \in \R^n \mid x_n > 0\}, \quad g(x) = \frac{1}{x_n^2} \, g_E(x)
+\]
+dove $g_E$ è il tensore euclideo. Mostra che le mappe seguenti sono isometrie per la varietà riemanniana $H^n$:
+\begin{itemize}
+    \item $f(x) = x + b$, con $b = (b_1, \ldots, b_{n-1}, 0)$;
+    \item $f(x) = \lambda x$ con $\lambda > 0$.
+\end{itemize}
+Deduci che il gruppo di isometrie $\operatorname{Isom}(H^n)$ di $H^n$ agisce transitivamente sulla varietà riemanniana $H^n$.
+
 \begin{proof}
-Sia $n$ la dimensione di $G$. Possiamo identificare $\mathfrak{g}=T_eG$ con $\R^n$ fissandone una base, ed usare la metrica euclidea standard su $\R^n$ per
-definire un prodotto scalare $\langle \cdot, \cdot \rangle_e$ su $T_eG$.
+    Sia $x \in H^n$ e $v, w \in T_xH^n$. Allora
+    \[
+        \langle v, w \rangle_x = \frac{1}{x_n^2} \, \langle v, w \rangle_E
+    \]
+    dove $\langle \cdot, \cdot \rangle_E$ è il prodotto scalare euclideo. Consideriamo la mappa $f(x) = x + b$; poichè $df_x(v) = v$ per ogni $v \in T_xH^n$, abbiamo
+    \[
+        \langle df_x(v), df_x(w) \rangle_{f(x)} = \langle v, w \rangle_{x + b} = \frac{1}{x_n^2} \, \langle v, w \rangle_E
+    \]
+    per ogni $v, w \in T_xH^n$. Dunque $f$ è un'isometria.
 
-Se poi $g \in G$ e $v, w \in T_gG$, possiamo estendere il prodotto scalare definito su $T_eG$ per traslazione, cioè ponendo
-\[
-\langle v, w \rangle_g = \langle (dL_{g^{-1}})_g(v), (dL_{g^{-1}})_g(w) \rangle_e
-\]
-Per costruzione, $\langle \cdot, \cdot \rangle_g$ è invariante a sinistra:
-\[
-\langle (dL_g)_h(v), (dL_g)_h(w) \rangle_{gh} = \langle v, w \rangle_h
-\]
-per ogni $g, h \in G$ e $v, w \in T_hG$.
+    Presa invece la mappa $h(x) = \lambda x$ con $\lambda > 0$, si ha $dh_x= \lambda \id_{T_xH^n}$, dunque
+    \[
+        \langle dh_x(v), dh_x(w) \rangle_{h(x)} = \langle \lambda v, \lambda w \rangle_{\lambda x} = \frac{1}{(\lambda x_n)^2} \, \langle \lambda v, \lambda w \rangle_E = \frac{1}{x_n^2} \, \langle v, w \rangle_E
+    \]
+    per ogni $v, w \in T_xH^n$ per bilinearità del prodotto scalare. Quindi anche $f$ è un'isometria.
 
+    Infine, presi $x, y \in H^n$, esiste $\lambda > 0$ tale che $y_n = \lambda x_n$ (ovvero $\lambda = \frac{y_n}{x_n}$).
+    Allora, posto \[b=(y_1 - \lambda x_1, \ldots, y_{n-1} - \lambda x_{n-1}, 0),\] l'isometria \[y = \lambda x + b\] manda $x$ in $y$, per cui il gruppo $\operatorname{Isom}(H^n)$ agisce transitivamente su $H^n$.
 \end{proof}
 
 \textbf{Esercizio 10.2}
-%Considera il piano iperbolico nel modello del semipiano:
-%H2 =
-%�
-%(x, y) ∈R2 | y > 0
-%�
-%,
-%g = 1
-%y 2 gE.
-%Calcola l’area del dominio
-%[−a, a] × [b, ∞)
-%per ogni a, b > 0. L’area è ovviamente quella indotta dalla forma volume della
-%varietà riemanniana H2.
-
 Considera il piano iperbolico nel modello del semipiano:
 \[
 H^2 = \{(x, y) \in \R^2 \mid y > 0\}, \quad g = \frac{1}{y^2} \, g_E
@@ -132,4 +134,61 @@ L'area di $A:=[-a, a] \times [b, \infty)$ è quindi
     \int_{b}^{\infty} \int_{-a}^{a} \frac{1}{y^2} \, dx \, dy = 2a\cdot \int_{b}^{\infty} \frac{1}{y^2} \, dy = 2a \left[ -\frac{1}{y} \right]_{b}^{\infty} = \frac{2a}{b}
 .\]
 \end{proof}
+\textbf{Esercizio 10.7}
+Sia $G$ un gruppo di Lie. Mostra che esiste sempre una metrica riemanniana su $G$ invariante a sinistra, cioè tale che $L_g : G \to G$ sia un'isometria per ogni $g \in G$.
+\begin{proof}
+Sia $n$ la dimensione di $G$. Possiamo identificare $\mathfrak{g}=T_eG$ con $\R^n$ fissandone una base, ed usare la metrica euclidea standard su $\R^n$ per
+definire un prodotto scalare $\langle \cdot, \cdot \rangle_e$ su $T_eG$.
+
+Se poi $g \in G$ e $v, w \in T_gG$, possiamo estendere il prodotto scalare definito su $T_eG$ per traslazione, cioè ponendo
+\[
+\langle v, w \rangle_g = \langle (dL_{g^{-1}})_g(v), (dL_{g^{-1}})_g(w) \rangle_e
+\]
+Per costruzione, $\langle \cdot, \cdot \rangle_g$ è invariante a sinistra:
+\[
+\langle (dL_g)_h(v), (dL_g)_h(w) \rangle_{gh} = \langle v, w \rangle_h
+\]
+per ogni $g, h \in G$ e $v, w \in T_hG$.
+
+\end{proof}
+
+\textbf{Esercizio 11.4}
+Consideriamo la connessione $\nabla$ su $\R^3$ con simboli di Christoffel
+\begin{align*}
+    \Gamma^3_{12} = \Gamma^1_{23} = \Gamma^2_{31} = 1, \\
+    \Gamma^3_{21} = \Gamma^1_{32} = \Gamma^2_{13} = -1
+\end{align*}
+e tutti gli altri simboli di Christoffel nulli. Mostra che questa connessione è compatibile con il tensore metrico euclideo $g$, ma non è simmetrica. Quali sono le geodetiche?
+\begin{proof}
+Per la Proposizione 9.3.5 delle dispense, $\nabla$ è compatibile con $g$ se e solo se
+\[
+    \frac{\partial g_{ij}}{\partial x^k} = \Gamma^l_{ki} g_{lj} + \Gamma^l_{kj} g_{li}
+.\]
+Poiché $g$ è il tensore metrico euclideo, $g_{ij} = \delta_{ij}$, e quindi la condizione di compatibilità diventa
+\[
+    0 = \Gamma^j_{ki}g_{jj} + \Gamma^i_{kj}g_{ii}=\Gamma^j_{ki}+\Gamma^i_{kj}
+.\]
+D'altronde, se $i,j,k$ non sono tutti distinti allora $\Gamma^j_{ki}=\Gamma^i_{kj}=0$ per ipotesi, mentre se lo sono allora
+$\Gamma^j_{ki}=-\Gamma^i_{kj}$. Dunque $\nabla$ è compatibile con $g$.
+
+Inoltre $\nabla$ non è simmetrica perché $\Gamma^3_{12} \neq \Gamma^3_{21}$.
+
+Infine, se $x(t)$ è la geodetica massimale passante per $x_0$ in direzione $v$, allora $x(t)$ risolve
+\[
+\begin{cases}
+x(0) = x_0, \\
+\dot{x}(t) = v, \\
+\frac{\partial^2x^k}{\partial t^2} + \frac{\partial x^i}{\partial t}\frac{\partial x^j}{\partial t}\Gamma^k_{ij} = 0
+\end{cases}
+\]
+per $k=1,2,3$. Visto che $\Gamma^1_{23} = -\Gamma^1_{32}$, $\Gamma^2_{31} = -\Gamma^2_{13}$ e $\Gamma^3_{12} = -\Gamma^3_{21}$, questo implica \[\frac{\partial^2 x^1}{\partial t^2}
+= \frac{\partial^2 x^2}{\partial t^2} = \frac{\partial^2 x^3}{\partial t^2} = 0,\] e quindi $x(t)=x_0+t v$. In conclusione, le geodetiche sono tutte e solo le rette.
+\end{proof}
+
+\textbf{Esercizio 11.6}
+Consideriamo il modello dell'iperboloide $I^n \subset \R^{n,1}$ dello spazio iperbolico. Mostra che per ogni $p, q \in I^n$ vale l'uguaglianza
+\[
+    \cosh d(p, q) = -\langle p, q \rangle
+.\]
+
 \end{document}
