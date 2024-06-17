@@ -84,111 +84,190 @@
 \textbf{Esercizio 10.1}
 Considera lo spazio iperbolico nel modello del semispazio:
 \[
-    H^n = \{x \in \R^n \mid x_n > 0\}, \quad g(x) = \frac{1}{x_n^2} \, g_E(x)
+	H^n = \{x \in \R^n \mid x_n > 0\}, \quad g(x) = \frac{1}{x_n^2} \, g_E(x)
 \]
 dove $g_E$ è il tensore euclideo. Mostra che le mappe seguenti sono isometrie per la varietà riemanniana $H^n$:
 \begin{itemize}
-    \item $f(x) = x + b$, con $b = (b_1, \ldots, b_{n-1}, 0)$;
-    \item $f(x) = \lambda x$ con $\lambda > 0$.
+	\item $f(x) = x + b$, con $b = (b_1, \ldots, b_{n-1}, 0)$;
+	\item $f(x) = \lambda x$ con $\lambda > 0$.
 \end{itemize}
 Deduci che il gruppo di isometrie $\operatorname{Isom}(H^n)$ di $H^n$ agisce transitivamente sulla varietà riemanniana $H^n$.
 
 \begin{proof}
-    Sia $x \in H^n$ e $v, w \in T_xH^n$. Allora
-    \[
-        \langle v, w \rangle_x = \frac{1}{x_n^2} \, \langle v, w \rangle_E
-    \]
-    dove $\langle \cdot, \cdot \rangle_E$ è il prodotto scalare euclideo. Consideriamo la mappa $f(x) = x + b$; poichè $df_x(v) = v$ per ogni $v \in T_xH^n$, abbiamo
-    \[
-        \langle df_x(v), df_x(w) \rangle_{f(x)} = \langle v, w \rangle_{x + b} = \frac{1}{x_n^2} \, \langle v, w \rangle_E
-    \]
-    per ogni $v, w \in T_xH^n$. Dunque $f$ è un'isometria.
+	Sia $x \in H^n$ e $v, w \in T_xH^n$. Allora
+	\[
+		\langle v, w \rangle_x = \frac{1}{x_n^2} \, \langle v, w \rangle_E
+	\]
+	dove $\langle \cdot, \cdot \rangle_E$ è il prodotto scalare euclideo. Consideriamo la mappa $f(x) = x + b$; poichè $df_x(v) = v$ per ogni $v \in T_xH^n$, abbiamo
+	\[
+		\langle df_x(v), df_x(w) \rangle_{f(x)} = \langle v, w \rangle_{x + b} = \frac{1}{x_n^2} \, \langle v, w \rangle_E
+	\]
+	per ogni $v, w \in T_xH^n$. Dunque $f$ è un'isometria.
 
-    Presa invece la mappa $h(x) = \lambda x$ con $\lambda > 0$, si ha $dh_x= \lambda \id_{T_xH^n}$, dunque
-    \[
-        \langle dh_x(v), dh_x(w) \rangle_{h(x)} = \langle \lambda v, \lambda w \rangle_{\lambda x} = \frac{1}{(\lambda x_n)^2} \, \langle \lambda v, \lambda w \rangle_E = \frac{1}{x_n^2} \, \langle v, w \rangle_E
-    \]
-    per ogni $v, w \in T_xH^n$ per bilinearità del prodotto scalare. Quindi anche $f$ è un'isometria.
+	Presa invece la mappa $h(x) = \lambda x$ con $\lambda > 0$, si ha $dh_x= \lambda \id_{T_xH^n}$, dunque
+	\[
+		\langle dh_x(v), dh_x(w) \rangle_{h(x)} = \langle \lambda v, \lambda w \rangle_{\lambda x} = \frac{1}{(\lambda x_n)^2} \, \langle \lambda v, \lambda w \rangle_E = \frac{1}{x_n^2} \, \langle v, w \rangle_E
+	\]
+	per ogni $v, w \in T_xH^n$ per bilinearità del prodotto scalare. Quindi anche $f$ è un'isometria.
 
-    Infine, presi $x, y \in H^n$, esiste $\lambda > 0$ tale che $y_n = \lambda x_n$ (ovvero $\lambda = \frac{y_n}{x_n}$).
-    Allora, posto \[b=(y_1 - \lambda x_1, \ldots, y_{n-1} - \lambda x_{n-1}, 0),\] l'isometria \[y = \lambda x + b\] manda $x$ in $y$, per cui il gruppo $\operatorname{Isom}(H^n)$ agisce transitivamente su $H^n$.
+	Infine, presi $x, y \in H^n$, esiste $\lambda > 0$ tale che $y_n = \lambda x_n$ (ovvero $\lambda = \frac{y_n}{x_n}$).
+	Allora, posto \[b=(y_1 - \lambda x_1, \ldots, y_{n-1} - \lambda x_{n-1}, 0),\] l'isometria \[y = \lambda x + b\] manda $x$ in $y$, per cui il gruppo $\operatorname{Isom}(H^n)$ agisce transitivamente su $H^n$.
 \end{proof}
 
 \textbf{Esercizio 10.2}
 Considera il piano iperbolico nel modello del semipiano:
 \[
-H^2 = \{(x, y) \in \R^2 \mid y > 0\}, \quad g = \frac{1}{y^2} \, g_E
+	H^2 = \{(x, y) \in \R^2 \mid y > 0\}, \quad g = \frac{1}{y^2} \, g_E
 \]
 Calcola l'area del dominio
 \[
-[-a, a] \times [b, \infty)
+	[-a, a] \times [b, \infty)
 \] per ogni $a, b > 0$. L'area è ovviamente quella indotta dalla forma volume della varietà riemanniana $H^2$.
 \begin{proof}
-La forma volume indotta dalla metrica $g$ sul piano iperbolico è
-\[
-    \omega = \frac{1}{y^2} \, dx \wedge dy
-.\]
-L'area di $A:=[-a, a] \times [b, \infty)$ è quindi
-\[
-    \int_A \omega = \int_A \frac{1}{y^2} \, dx \wedge dy
-    \int_{b}^{\infty} \int_{-a}^{a} \frac{1}{y^2} \, dx \, dy = 2a\cdot \int_{b}^{\infty} \frac{1}{y^2} \, dy = 2a \left[ -\frac{1}{y} \right]_{b}^{\infty} = \frac{2a}{b}
-.\]
+	La forma volume indotta dalla metrica $g$ sul piano iperbolico è
+	\[
+		\omega = \frac{1}{y^2} \, dx \wedge dy
+		.\]
+	L'area di $A:=[-a, a] \times [b, \infty)$ è quindi
+	\[
+		\int_A \omega = \int_A \frac{1}{y^2} \, dx \wedge dy
+		\int_{b}^{\infty} \int_{-a}^{a} \frac{1}{y^2} \, dx \, dy = 2a\cdot \int_{b}^{\infty} \frac{1}{y^2} \, dy = 2a \left[ -\frac{1}{y} \right]_{b}^{\infty} = \frac{2a}{b}
+		.\]
 \end{proof}
 \textbf{Esercizio 10.7}
 Sia $G$ un gruppo di Lie. Mostra che esiste sempre una metrica riemanniana su $G$ invariante a sinistra, cioè tale che $L_g : G \to G$ sia un'isometria per ogni $g \in G$.
 \begin{proof}
-Sia $n$ la dimensione di $G$. Possiamo identificare $\mathfrak{g}=T_eG$ con $\R^n$ fissandone una base, ed usare la metrica euclidea standard su $\R^n$ per
-definire un prodotto scalare $\langle \cdot, \cdot \rangle_e$ su $T_eG$.
+	Sia $n$ la dimensione di $G$. Possiamo identificare $\mathfrak{g}=T_eG$ con $\R^n$ fissandone una base, ed usare la metrica euclidea standard su $\R^n$ per
+	definire un prodotto scalare $\langle \cdot, \cdot \rangle_e$ su $T_eG$.
 
-Se poi $g \in G$ e $v, w \in T_gG$, possiamo estendere il prodotto scalare definito su $T_eG$ per traslazione, cioè ponendo
-\[
-\langle v, w \rangle_g = \langle (dL_{g^{-1}})_g(v), (dL_{g^{-1}})_g(w) \rangle_e
-\]
-Per costruzione, $\langle \cdot, \cdot \rangle_g$ è invariante a sinistra:
-\[
-\langle (dL_g)_h(v), (dL_g)_h(w) \rangle_{gh} = \langle v, w \rangle_h
-\]
-per ogni $g, h \in G$ e $v, w \in T_hG$.
+	Se poi $g \in G$ e $v, w \in T_gG$, possiamo estendere il prodotto scalare definito su $T_eG$ per traslazione, cioè ponendo
+	\[
+		\langle v, w \rangle_g = \langle (dL_{g^{-1}})_g(v), (dL_{g^{-1}})_g(w) \rangle_e
+	\]
+	Per costruzione, $\langle \cdot, \cdot \rangle_g$ è invariante a sinistra:
+	\[
+		\langle (dL_g)_h(v), (dL_g)_h(w) \rangle_{gh} = \langle v, w \rangle_h
+	\]
+	per ogni $g, h \in G$ e $v, w \in T_hG$.
 
+\end{proof}
+
+\textbf{Esercizio 11.2}
+Scrivi la metrica euclidea $g$ su $\R^2 \setminus \{0\}$ usando le coordinate polari $(\theta, \rho)$ e determina i simboli di Christoffel della connessione di Levi-Civita rispetto a queste variabili $\theta, \rho$.
+
+\begin{proof}
+	La matrice Jacobiana del cambio di coordinate $(x, y) \mapsto (\rho \cos \theta, \rho \sin \theta)$ è
+	\[
+		\begin{pmatrix}
+			-\rho \sin \theta & \cos \theta \\
+			\rho \cos \theta  & \sin \theta
+		\end{pmatrix}
+	\]
+	Quindi, otteniamo la metrica euclidea in coordinate polari:
+	\[
+		g_{\theta \theta} = \frac{\partial x}{\partial \theta}\cdot \frac{\partial x}{\partial \theta} + \frac{\partial y}{\partial \theta}\cdot \frac{\partial y}{\partial \theta} = \rho^2, \quad g_{\rho \rho} = \frac{\partial x}{\partial \rho}\cdot \frac{\partial x}{\partial \rho} + \frac{\partial y}{\partial \rho}\cdot \frac{\partial y}{\partial \rho} = 1,
+	\]
+	e $g_{\theta \rho} = g_{\rho \theta} = \frac{\partial x}{\partial \theta}\cdot \frac{\partial x}{\partial \rho} + \frac{\partial y}{\partial \theta}\cdot \frac{\partial y}{\partial \rho} = 0$.
+	Deduciamo che $g^{\theta \theta} = \frac{1}{\rho^2}$, $g^{\rho \rho} = 1$ e $g^{\theta \rho} = g^{\rho \theta} = 0$.
+	Per calcolare i simboli di Christoffel usiamo la formula per la connessione di Levi-Civita
+	\[
+		\Gamma^l_{ij} = \frac{1}{2} g^{kl} \left( \frac{\partial g_{jk}}{\partial x^i} + \frac{\partial g_{ki}}{\partial x^j} - \frac{\partial g_{ij}}{\partial x^k} \right),
+	\]
+	e per simmetria di tale connessione ci basta calcolare
+	\[
+		\begin{cases}
+
+			\Gamma^{\theta}_{\theta \theta} = \frac{1}{2} g^{\theta \theta} \frac{\partial g_{\theta \theta}}{\partial \theta} = 0,          \\
+			\Gamma^{\theta}_{\rho \rho} = -\frac{1}{2} g^{\theta \theta} \frac{\partial g_{\rho \rho}}{\partial \theta} = 0,                 \\
+			\Gamma^{\theta}_{\rho \theta} = \frac{1}{2} g^{\theta \theta} \frac{\partial g_{\theta \theta}}{\partial \rho} = \frac{1}{\rho}, \\
+			\Gamma^{\rho}_{\theta \theta} = \frac{1}{2} g^{\rho \rho} \frac{\partial g_{\theta \theta}}{\partial \rho} = -\rho,              \\
+			\Gamma^{\rho}_{\rho \rho} = \frac{1}{2} g^{\rho \rho} \frac{\partial g_{\rho \rho}}{\partial \rho} = 0,                          \\
+			\Gamma^{\rho}_{\theta \rho} = \frac{1}{2} g^{\rho \rho} \frac{\partial g_{\theta \rho}}{\partial \rho} = 0.
+		\end{cases}
+	\]
 \end{proof}
 
 \textbf{Esercizio 11.4}
 Consideriamo la connessione $\nabla$ su $\R^3$ con simboli di Christoffel
 \begin{align*}
-    \Gamma^3_{12} = \Gamma^1_{23} = \Gamma^2_{31} = 1, \\
-    \Gamma^3_{21} = \Gamma^1_{32} = \Gamma^2_{13} = -1
+	\Gamma^3_{12} = \Gamma^1_{23} = \Gamma^2_{31} = 1, \\
+	\Gamma^3_{21} = \Gamma^1_{32} = \Gamma^2_{13} = -1,
 \end{align*}
 e tutti gli altri simboli di Christoffel nulli. Mostra che questa connessione è compatibile con il tensore metrico euclideo $g$, ma non è simmetrica. Quali sono le geodetiche?
 \begin{proof}
-Per la Proposizione 9.3.5 delle dispense, $\nabla$ è compatibile con $g$ se e solo se
-\[
-    \frac{\partial g_{ij}}{\partial x^k} = \Gamma^l_{ki} g_{lj} + \Gamma^l_{kj} g_{li}
-.\]
-Poiché $g$ è il tensore metrico euclideo, $g_{ij} = \delta_{ij}$, e quindi la condizione di compatibilità diventa
-\[
-    0 = \Gamma^j_{ki}g_{jj} + \Gamma^i_{kj}g_{ii}=\Gamma^j_{ki}+\Gamma^i_{kj}
-.\]
-D'altronde, se $i,j,k$ non sono tutti distinti allora $\Gamma^j_{ki}=\Gamma^i_{kj}=0$ per ipotesi, mentre se lo sono allora
-$\Gamma^j_{ki}=-\Gamma^i_{kj}$. Dunque $\nabla$ è compatibile con $g$.
+	Per la Proposizione 9.3.5 delle dispense, $\nabla$ è compatibile con $g$ se e solo se
+	\[
+		\frac{\partial g_{ij}}{\partial x^k} = \Gamma^l_{ki} g_{lj} + \Gamma^l_{kj} g_{li}
+		.\]
+	Poiché $g$ è il tensore metrico euclideo, $g_{ij} = \delta_{ij}$, e quindi la condizione di compatibilità diventa
+	\[
+		0 = \Gamma^j_{ki}g_{jj} + \Gamma^i_{kj}g_{ii}=\Gamma^j_{ki}+\Gamma^i_{kj}
+		.\]
+	D'altronde, se $i,j,k$ non sono tutti distinti allora $\Gamma^j_{ki}=\Gamma^i_{kj}=0$ per ipotesi, mentre se lo sono allora
+	$\Gamma^j_{ki}=-\Gamma^i_{kj}$. Dunque $\nabla$ è compatibile con $g$.
 
-Inoltre $\nabla$ non è simmetrica perché $\Gamma^3_{12} \neq \Gamma^3_{21}$.
+	Inoltre $\nabla$ non è simmetrica perché $\Gamma^3_{12} \neq \Gamma^3_{21}$.
 
-Infine, se $x(t)$ è la geodetica massimale passante per $x_0$ in direzione $v$, allora $x(t)$ risolve
-\[
-\begin{cases}
-x(0) = x_0, \\
-\dot{x}(t) = v, \\
-\frac{\partial^2x^k}{\partial t^2} + \frac{\partial x^i}{\partial t}\frac{\partial x^j}{\partial t}\Gamma^k_{ij} = 0
-\end{cases}
-\]
-per $k=1,2,3$. Visto che $\Gamma^1_{23} = -\Gamma^1_{32}$, $\Gamma^2_{31} = -\Gamma^2_{13}$ e $\Gamma^3_{12} = -\Gamma^3_{21}$, questo implica \[\frac{\partial^2 x^1}{\partial t^2}
-= \frac{\partial^2 x^2}{\partial t^2} = \frac{\partial^2 x^3}{\partial t^2} = 0,\] e quindi $x(t)=x_0+t v$. In conclusione, le geodetiche sono tutte e solo le rette.
+	Infine, se $x(t)$ è la geodetica massimale passante per $x_0$ in direzione $v$, allora $x(t)$ risolve
+	\[
+		\begin{cases}
+			x(0) = x_0,     \\
+			\dot{x}(t) = v, \\
+			\frac{\partial^2x^k}{\partial t^2} + \frac{\partial x^i}{\partial t}\frac{\partial x^j}{\partial t}\Gamma^k_{ij} = 0
+		\end{cases}
+	\]
+	per $k=1,2,3$. Visto che $\Gamma^1_{23} = -\Gamma^1_{32}$, $\Gamma^2_{31} = -\Gamma^2_{13}$ e $\Gamma^3_{12} = -\Gamma^3_{21}$, questo implica \[\frac{\partial^2 x^1}{\partial t^2}
+		= \frac{\partial^2 x^2}{\partial t^2} = \frac{\partial^2 x^3}{\partial t^2} = 0,\] e quindi $x(t)=x_0+t v$. In conclusione, le geodetiche sono tutte e solo le rette.
 \end{proof}
 
 \textbf{Esercizio 11.6}
 Consideriamo il modello dell'iperboloide $I^n \subset \R^{n,1}$ dello spazio iperbolico. Mostra che per ogni $p, q \in I^n$ vale l'uguaglianza
 \[
-    \cosh d(p, q) = -\langle p, q \rangle
-.\]
+	\cosh d(p, q) = -\langle p, q \rangle
+	.\]
+
+\begin{proof}
+	Sappiamo che in $I^n$ le geodetiche massimali passanti per $p\in I^n$ in direzione $v\in T_pI^n$ con velocità $c>0$ sono della forma
+	\[
+		\gamma(t) = \cosh (ct) \,\cdot p + \sinh (ct) \,\cdot v.
+	\]
+	Se $\gamma$ è una tale geodetica che parte da $p$ e arriva in $q$ a tempo $t=1$, allora $d(p, q) = L(\gamma) = c$.
+
+	Quindi, calcolando $\gamma(1)$ otteniamo
+	\[
+		v= \frac{q-\cosh(c)\cdot p}{\sinh(c)},
+	\]
+	e visto che $\langle x, x \rangle = -1$ per ogni $x \in I^n$, otteniamo
+	\[
+		1 = \langle v, v \rangle = \frac{\langle q, q \rangle - 2\cosh(c)\langle p, q \rangle + \cosh^2(c)\langle p, p \rangle}{\sinh^2(c)} = -1 - 2\cosh(c)\langle p, q \rangle - \cosh^2(c),
+	\]
+	da cui \[\cosh(d(p,q))=\cosh(c) = -\langle p, q \rangle\] come volevamo.
+\end{proof}
+
+\textbf{Esercizio 12.3}
+Mostra che una varietà riemanniana omogenea è sempre completa.
+\begin{proof}
+	Sia $M$ una varietà riemanniana omogenea e $p \in M$. Poiché $M$ è omogenea, per ogni altro punto $q\in M$ esiste un isometria $f$ che manda $p$ in $q$.
+
+	Per Hopf-Rinow, vogliamo mostrare che $M$ è geodeticamente completa. Sia $\gamma: I \to M$ una geodetica massimale con $\gamma(0)=p$, e senza perdità di generalità supponiamo che $\sup I < +\infty$. Allora, visto che le isometrie mandano geodetiche in geodetiche $f\circ \gamma$ è una geodetica massimale definita su $I$ con $(f\circ \gamma)(0)=q$. Per ogni $r>0$, prendendo $q=\gamma(r)$ abbiamo che $\gamma\cap (f\circ \gamma)\neq \emptyset$, e quindi per unicità delle geodetiche siamo riusciti ad estendere $\gamma$, contraddicendo la massimalità di $\gamma$.
+\end{proof}
+
+\textbf{Esercizio 12.5}
+Sia $f: M \to N$ una isometria locale tra varietà riemanniane connesse che è anche un rivestimento. Mostra che $M$ è completa $\iff N$ è completa.
+\begin{proof}
+	Supponiamo che $M$ sia completa. Essendo $f$ in particolare suriettiva, dati $p\in N$ e $v\in T_p N$ troviamo $q\in M$ e $w\in T_q M$ tali che $f(q)=p$ e $df_q(w)=v$. Poiché $M$ è completa, esiste una geodetica $\gamma: \R \to M$ con $\gamma(0)=q$ e $\dot{\gamma}(0)=w$. Allora visto che $f$ è un'isometria locale, $f\circ \gamma$ è una geodetica di $N$ con $f\circ \gamma(0)=p$ e $\dot{(f\circ \gamma)}(0)=v$ definita su tutto $\R$, per cui $N$ è completa.
+
+	Viceversa, data una geodetica $\gamma$ in $N$, visto che $f$ è sia un rivestimento che un isometria locale essa si solleva a una geodetica $\tilde{\gamma}$ in $M$ tale che $f\circ \tilde{\gamma} = \gamma$. Poiché $N$ è completa, $\gamma$ è definita su tutto $\R$, e quindi $\tilde{\gamma}$ è definita su tutto $\R$ per cui $M$ è completa.
+\end{proof}
+
+\textbf{Esercizio 12.6}
+Mostra che una varietà riemanniana completa e isotropa in ogni suo punto è anche omogenea.
+\begin{proof}
+	Vogliamo mostrare che per ogni $p, q \in M$ esiste un'isometria $f$ tale che $f(p)=q$.
+
+	Per la proposizione 10.3.2, esiste una geodetica minimizzante $\gamma_v: [0,2] \to M$ per qualche $v\in T_p M$ con $\gamma_v(0)=p$ e $\gamma_v(2)=q$. Poiché $M$ è isotropa in ogni punto, esiste un'isometria $\varphi$ tale che \[\varphi(\gamma_v(1))=\gamma_v(1), \quad d\varphi_{\gamma_v(1)}(\dot{\gamma_v}(1))=-\dot{\gamma_v}(1).\]
+
+	Allora, \[\varphi(q)=\varphi(\gamma_v(2))=\varphi(\gamma_{\dot{\gamma_v}(1)}(1))=\gamma_{d\varphi_{\gamma_v(1)}(\dot{\gamma_v}(1))}(1)=\gamma_{-\dot{\gamma_v}(1)}(1)=\gamma_v(0)=p,\] dove abbiamo usato il fatto che la connessione di Levi-Civita commuta con le isometrie. Quindi, $\varphi^{-1}$ è l'isometria cercata.
+\end{proof}
 
 \end{document}
